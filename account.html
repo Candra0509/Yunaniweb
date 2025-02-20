@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buat Akun - Travel</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            text-align: center;
+            padding: 50px;
+        }
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+            margin: auto;
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Buat Akun</h2>
+        <p>Silakan isi formulir di bawah ini untuk mendaftar.</p>
+
+        <input type="text" id="name" placeholder="Nama Lengkap">
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="password" placeholder="Kata Sandi">
+        <input type="password" id="confirmPassword" placeholder="Konfirmasi Kata Sandi">
+        <p class="error" id="errorMessage"></p>
+        <button onclick="register()">Daftar</button>
+
+        <p>Sudah punya akun? <a href="login.html">Masuk</a></p>
+    </div>
+
+    <script>
+        function register() {
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            let confirmPassword = document.getElementById("confirmPassword").value;
+            let errorMessage = document.getElementById("errorMessage");
+
+            if (name === "" || email === "" || password === "" || confirmPassword === "") {
+                errorMessage.innerText = "Semua kolom harus diisi!";
+                return;
+            }
+
+            if (!email.includes("@") || !email.includes(".")) {
+                errorMessage.innerText = "Email tidak valid!";
+                return;
+            }
+
+            if (password.length < 6) {
+                errorMessage.innerText = "Kata sandi harus minimal 6 karakter!";
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                errorMessage.innerText = "Kata sandi tidak cocok!";
+                return;
+            }
+
+            // Simpan data pengguna di LocalStorage
+            localStorage.setItem("name", name);
+            localStorage.setItem("email", email);
+            localStorage.setItem("password", password);
+
+            alert("Pendaftaran berhasil! Silakan login.");
+            window.location.href = "login.html";
+        }
+    </script>
+
+</body>
+</html>
