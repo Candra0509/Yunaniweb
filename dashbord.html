@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Utama</title>
+</head>
+<body>
+    <h1>Selamat datang di Halaman Utama</h1>
+    <p>Ini adalah halaman yang hanya bisa diakses setelah login berhasil.</p>
+
+    <!-- Gambar Profil (Awalnya disembunyikan) -->
+    <div id="profile-container" style="display: none;">
+        <img src="logo-profil.png" alt="Logo Profil" width="100">
+    </div>
+
+    <button onclick="logout()">Logout</button>
+
+    <script>
+        // Cek apakah pengguna sudah login
+        function checkLoginStatus() {
+            var isLoggedIn = localStorage.getItem('isLoggedIn');
+            
+            if (isLoggedIn !== 'true') {
+                // Jika belum login, kembalikan ke halaman login
+                window.location.href = 'index.html';
+            } else {
+                // Jika sudah login, tampilkan gambar profil
+                document.getElementById('profile-container').style.display = 'block';
+            }
+        }
+
+        // Fungsi logout untuk mengarahkan kembali ke halaman login
+        function logout() {
+            localStorage.removeItem('isLoggedIn'); // Hapus status login
+            window.location.href = 'index.html'; // Kembali ke halaman login
+        }
+
+        // Jalankan pengecekan saat halaman dimuat
+        checkLoginStatus();
+    </script>
+</body>
+</html>
